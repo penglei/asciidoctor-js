@@ -1,0 +1,5 @@
+= asciidoctor javascript demo
+
+== minifier
+
+ $ html-minifier-terser --collapse-whitespace --remove-comments --minify-js true --minify-css true samples/demo.html
