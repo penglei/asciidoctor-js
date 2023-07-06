@@ -1,0 +1,3 @@
+= xref demo
+
+Refer to xref:../document-b.adoc#section-b[Section B] for more information.

@@ -47,7 +47,8 @@ var asciidoctor = Asciidoctor();
 
 // Read input from stdin
 const input = readInput();
-// Call the function with the input
+
 const result = asciidoctor.convert(input);
+
 // Write the result to stdout
 writeOutput(result);

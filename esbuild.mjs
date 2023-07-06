@@ -1,5 +1,7 @@
 import * as esbuild from "esbuild";
 
+//!!! this script is in developing !!!
+
 let exampleOnLoadPlugin = {
   name: "example",
   setup(build) {

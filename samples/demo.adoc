@@ -1,4 +1,5 @@
 = Sidebar
+:tags: foo, bar
 
 这里是preamble
 

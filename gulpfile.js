@@ -87,7 +87,7 @@ const build = (src, dest, cb) => {
   const sourcemaps = true; //process.env.SOURCEMAPS === "true";
 
   let buildAsciidoctorForJavyWasm = gulp
-    .src("js/javy_wasm_asciidoctor.js", { ...sourceOpts, sourcemaps })
+    .src("js/javy_wasm_wrapper.js", { ...sourceOpts, sourcemaps })
     .pipe(
       gulpEsbuild({
         outfile: "javy_wasm_asciidoctor.js",
@@ -100,6 +100,26 @@ const build = (src, dest, cb) => {
         sourcemaps: sourcemaps && ".",
       })
     );
+
+  let buildSimpleAsciidoctor = gulp
+    .src("js/simple_wrapper.js", { ...sourceOpts, sourcemaps })
+    .pipe(
+      gulpEsbuild({
+        outfile: "simple_asciidoctor.js",
+        bundle: true,
+        minify: true,
+      })
+    )
+    .pipe(
+      gulp.dest(path.join(dest, "asciidoctor"), {
+        sourcemaps: sourcemaps && ".",
+      })
+    );
+
+  let asciidoctorWrappers = merge(
+    buildAsciidoctorForJavyWasm,
+    buildSimpleAsciidoctor
+  );
 
   let buildAntoraStatic = (cssSrc, srcOpts, outDir) =>
     merge(
@@ -152,7 +172,7 @@ const build = (src, dest, cb) => {
       antoraSrcOpts,
       path.join(dest, "antora-ui-docpost")
     ),
-    buildAsciidoctorForJavyWasm
+    asciidoctorWrappers
   ).on("end", cb);
 };
 

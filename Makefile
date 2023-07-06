@@ -2,6 +2,7 @@
 
 build:
 	@./node_modules/.bin/gulp build
+#	rsync -avh build-out/* dist --delete
 
 wasm: dist/asciidoctor/javy_wasm_asciidoctor.js
 	./local/tools/javy compile -d -o build-out/wasm/asciidoctor-dynamiclink.wasm $<
